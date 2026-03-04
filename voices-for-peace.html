@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voices for Peace</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1a4f8a;
+    --blue-light: #2563a8;
+    --blue-dark: #0d2d52;
+    --gold: #c8963e;
+    --gold-light: #e4b86a;
+    --white: #ffffff;
+    --off-white: #f5f3ef;
+    --text: #1c1c1c;
+    --text-mid: #444444;
+    --text-light: #777777;
+    --border: #ddd8cf;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 72px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: box-shadow .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px; height: 44px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .nav-logo-text {
+    font-family: 'Cinzel', serif;
+    color: var(--blue-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+  .nav-logo-text span {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color .2s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-btn {
+    background: var(--gold);
+    color: var(--white) !important;
+    padding: 9px 22px !important;
+    border-radius: 3px;
+    letter-spacing: 0.08em !important;
+    transition: background .2s !important;
+  }
+  .nav-btn:hover { background: var(--gold-light) !important; color: var(--white) !important; }
+  .nav-btn::after { display: none !important; }
+
+  /* ── HERO ── */
+  .hero {
+    margin-top: 72px;
+    height: calc(100vh - 72px);
+    min-height: 560px;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--blue-dark);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(200,150,62,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 20%, rgba(37,99,168,0.3) 0%, transparent 50%),
+      linear-gradient(135deg, #0a1e38 0%, #1a4f8a 50%, #0d2d52 100%);
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(
+      45deg,
+      var(--white) 0, var(--white) 1px,
+      transparent 0, transparent 50%
+    );
+    background-size: 20px 20px;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 0 5%;
+    max-width: 820px;
+    animation: fadeUp 1s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(200,150,62,0.5);
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    animation: fadeUp 1s .1s ease both;
+  }
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    color: var(--white);
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    font-weight: 600;
+    line-height: 1.12;
+    margin-bottom: 24px;
+    animation: fadeUp 1s .2s ease both;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    animation: fadeUp 1s .3s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1s .4s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--white);
+    padding: 14px 36px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background .2s, transform .2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: var(--white);
+    padding: 14px 36px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2.5s infinite;
+  }
+  .hero-scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--blue);
+    padding: 28px 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    text-align: center;
+  }
+  .stat-item { padding: 8px; }
+  .stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 90px 5%; }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .section-divider {
+    width: 48px; height: 3px;
+    background: var(--gold);
+    margin-bottom: 28px;
+  }
+  .section-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-mid);
+    max-width: 640px;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--off-white); }
+  .about-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--blue);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .about-img-frame::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-img-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px;
+    color: rgba(255,255,255,0.4);
+  }
+  .about-img-placeholder .icon { font-size: 4rem; }
+  .about-img-placeholder p { font-size: 0.85rem; letter-spacing: 0.1em; }
+  .about-corner {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+  .about-quote {
+    margin-top: 40px;
+    border-left: 3px solid var(--gold);
+    padding: 12px 0 12px 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--blue-dark);
+    line-height: 1.6;
+  }
+  .about-quote cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── PILLARS ── */
+  .pillars { background: var(--white); }
+  .pillars-inner { max-width: 1100px; margin: 0 auto; }
+  .pillars-header { text-align: center; margin-bottom: 60px; }
+  .pillars-header .section-divider { margin: 0 auto 28px; }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .pillar {
+    background: var(--white);
+    padding: 44px 36px;
+    transition: background .25s;
+  }
+  .pillar:hover { background: var(--off-white); }
+  .pillar-icon {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .pillar h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--blue-dark);
+    margin-bottom: 14px;
+  }
+  .pillar p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  /* ── LATEST ── */
+  .latest { background: var(--off-white); }
+  .latest-inner { max-width: 1100px; margin: 0 auto; }
+  .latest-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px;
+  }
+  .latest-header a {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color .2s;
+  }
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+  .article-card {
+    background: var(--white);
+    overflow: hidden;
+    transition: box-shadow .25s, transform .25s;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+  .article-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-4px); }
+  .article-thumb {
+    height: 200px;
+    background: var(--blue);
+    position: relative;
+    overflow: hidden;
+  }
+  .article-thumb-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+  }
+  .thumb-1 { background: linear-gradient(135deg, #0a1e38, #1a4f8a); }
+  .thumb-2 { background: linear-gradient(135deg, #1a4f8a, #2563a8); }
+  .thumb-3 { background: linear-gradient(135deg, #0d2d52, #c8963e44); }
+  .article-tag {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+  .article-body { padding: 28px; }
+  .article-date {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  .article-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--blue-dark);
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .article-body p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+  .article-link {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--blue);
+    padding-bottom: 2px;
+  }
+
+  /* ── CALL TO ACTION ── */
+  .cta {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+    padding: 100px 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '☮';
+    position: absolute;
+    font-size: 400px;
+    opacity: 0.03;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    color: var(--white);
+    line-height: 1;
+  }
+  .cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .cta .section-title { color: var(--white); }
+  .cta .section-divider { margin: 0 auto 28px; }
+  .cta p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── EVENTS ── */
+  .events { background: var(--white); }
+  .events-inner { max-width: 1100px; margin: 0 auto; }
+  .events-list { display: flex; flex-direction: column; gap: 2px; margin-top: 48px; }
+  .event-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 28px;
+    align-items: center;
+    padding: 28px 32px;
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    transition: background .2s;
+    border-radius: 2px;
+  }
+  .event-item:hover { background: #eee8de; }
+  .event-date-box {
+    text-align: center;
+    background: var(--blue);
+    padding: 12px 8px;
+    border-radius: 2px;
+  }
+  .event-date-box .day {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .event-date-box .month {
+    font-size: 0.7rem;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .event-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+  }
+  .event-info p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    display: flex; gap: 16px; align-items: center;
+  }
+  .event-tag {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--off-white); }
+  .contact-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px;
+    align-items: start;
+  }
+  .contact-info-item {
+    display: flex; gap: 16px;
+    margin-bottom: 32px;
+  }
+  .contact-icon {
+    width: 44px; height: 44px;
+    background: var(--blue);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .contact-info-item h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .contact-info-item p {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color .2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--blue);
+  }
+  .form-group textarea { resize: vertical; min-height: 130px; }
+  .form-submit {
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 14px 36px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background .2s;
+    align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--blue-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue-dark);
+    padding: 60px 5% 32px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin: 16px 0 24px;
+    max-width: 280px;
+  }
+  .footer-social { display: flex; gap: 12px; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    transition: background .2s, color .2s;
+  }
+  .social-btn:hover { background: var(--gold); color: var(--white); }
+  .footer-col h4 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    transition: color .2s;
+  }
+  .footer-col a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-logo-text {
+    font-family: 'Cinzel', serif;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .about-inner,
+    .contact-inner,
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .event-item { grid-template-columns: 60px 1fr; }
+    .event-tag { display: none; }
+    .latest-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+  @media (max-width: 520px) {
+    .footer-inner { grid-template-columns: 1fr; }
+    section { padding: 64px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">☮</div>
+    <div class="nav-logo-text">
+      Voices for Peace
+      <span>ahmadiyya muslim community</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#latest">Latest</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.justgiving.com/page/voicesforpeace" class="nav-btn">Donate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Global Peace Initiative · #VoicesForPeace</div>
+    <h1 class="hero-title">
+      Raise Your Voice<br>
+      <em>For Peace</em>
+    </h1>
+    <p class="hero-sub">
+      Join a global movement calling for justice, a permanent ceasefire, and the protection of innocent lives. Together, our voices carry across borders.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Write to Your MP</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">35,000+</span>
+    <span class="stat-label">People Killed</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">78,000+</span>
+    <span class="stat-label">People Injured</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">60%</span>
+    <span class="stat-label">Residential Units Damaged</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">35%</span>
+    <span class="stat-label">Hospitals Partially Operational</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">300+</span>
+    <span class="stat-label">Places of Worship Damaged</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">400+</span>
+    <span class="stat-label">Educational Facilities Damaged</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="about-img-frame">
+        <div class="about-img-placeholder">
+          <span class="icon">☮</span>
+          <p>Voices for Peace</p>
+        </div>
+      </div>
+      <div class="about-corner"></div>
+      <blockquote class="about-quote">
+        "Whatever injustice and cruelty Hamas committed, the response to that or war should have been restricted to Hamas."
+        <cite>— His Holiness Mirza Masroor Ahmad, October 2023</cite>
+      </blockquote>
+    </div>
+    <div class="about-text">
+      <p class="section-label">Who We Are</p>
+      <h2 class="section-title">A Platform for Peace-Building</h2>
+      <div class="section-divider"></div>
+      <p class="section-text">
+        The Ahmadiyya Muslim Community International, under the guidance of its Caliph Hazrat Mirza Masroor Ahmad, launched the global <strong>#VoicesForPeace</strong> campaign to bring an end to the war in Gaza and establish lasting peace.
+      </p>
+      <br>
+      <p class="section-text">
+        We have held global forums across the world — including at the UK Houses of Parliament, Capitol Hill, and the Scottish Parliament — calling for an immediate and permanent ceasefire, the protection of innocent civilians, and a just resolution.
+      </p>
+      <br>
+      <a href="#contact" class="btn-primary" style="display:inline-block; margin-top:8px;">Join the Movement</a>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars">
+  <div class="pillars-inner">
+    <div class="pillars-header">
+      <p class="section-label">What Must Happen</p>
+      <h2 class="section-title">Our Core Demands</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <span class="pillar-icon">🕊️</span>
+        <h3>Permanent Ceasefire</h3>
+        <p>An immediate and lasting ceasefire is a moral imperative. The ongoing conflict has claimed tens of thousands of innocent lives and must be brought to an end now.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🛡️</span>
+        <h3>Protecting the Innocent</h3>
+        <p>Civilian lives must be protected under international law. Every child, woman, and man caught in the crossfire deserves safety, shelter, and access to aid.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">⚖️</span>
+        <h3>Justice for All</h3>
+        <p>True peace is only achievable through justice. All parties must be held accountable, and the rights of every people must be upheld equally and without bias.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🌐</span>
+        <h3>Global De-escalation</h3>
+        <p>Major world powers have a responsibility to act. We call on world leaders to prioritise diplomacy and to actively support de-escalation before further catastrophe unfolds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST -->
+<section class="latest" id="latest">
+  <div class="latest-inner">
+    <div class="latest-header">
+      <div>
+        <p class="section-label">News & Updates</p>
+        <h2 class="section-title">Latest from Voices for Peace</h2>
+        <div class="section-divider"></div>
+      </div>
+      <a href="https://voicesforpeace.org">View All Posts →</a>
+    </div>
+    <div class="articles-grid">
+      <div class="article-card">
+        <div class="article-thumb thumb-1">
+          <div class="article-thumb-bg">🤲</div>
+          <span class="article-tag">Pearls of Wisdom</span>
+        </div>
+        <div class="article-body">
+          <p class="article-date">March 21, 2025</p>
+          <h3>Prayers for Ahmadis in Pakistan and Muslims of Palestine</h3>
+          <p>His Holiness addresses the continued persecution of Ahmadis in Pakistan and calls for earnest prayers for the suffering people of Palestine.</p>
+          <a href="https://voicesforpeace.org/2025/03/21/prayers-for-ahmadis-in-pakistan-and-muslims-of-palestine/" class="article-link">Read More</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-thumb thumb-2">
+          <div class="article-thumb-bg">🌍</div>
+          <span class="article-tag">Pearls of Wisdom</span>
+        </div>
+        <div class="article-body">
+          <p class="article-date">November 22, 2024</p>
+          <h3>Prayers and Preparedness Amid Global Turmoil</h3>
+          <p>As global conflicts intensify, His Holiness reminds the world community of the urgent need for prayer, vigilance, and steadfast commitment to peace.</p>
+          <a href="https://voicesforpeace.org/2024/11/22/prayers-and-preparedness-amid-global-turmoil/" class="article-link">Read More</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-thumb thumb-3">
+          <div class="article-thumb-bg">🏛️</div>
+          <span class="article-tag">Events</span>
+        </div>
+        <div class="article-body">
+          <p class="article-date">September 25, 2024</p>
+          <h3>Voices for Peace Held at Scottish Parliament</h3>
+          <p>A powerful gathering took place at the Scottish Parliament in Edinburgh, bringing together community leaders and politicians in a unified call for peace.</p>
+          <a href="https://voicesforpeace.org/2024/09/25/voices-for-peace-held-at-scottish-parliament/" class="article-link">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <p class="section-label" style="color:var(--gold-light)">Take Action Today</p>
+    <h2 class="section-title">Help Us Make a Difference</h2>
+    <div class="section-divider"></div>
+    <p>Write to your local politician. Share the call for peace. Donate to humanitarian efforts in Gaza. Every voice, every action, every pound of support matters.</p>
+    <div class="cta-actions">
+      <a href="https://voicesforpeace.org/wp-content/uploads/2025/05/CeasefireNow-Letter-May-2025.docx" class="btn-primary">📄 Download Letter Template</a>
+      <a href="https://www.justgiving.com/page/voicesforpeace" class="btn-outline">❤️ Donate Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="events-inner">
+    <p class="section-label">Community & Global Events</p>
+    <h2 class="section-title">Voices for Peace Events</h2>
+    <div class="section-divider"></div>
+    <p class="section-text">From Capitol Hill to the Houses of Parliament, we gather to raise our voices in the halls of power and in our communities.</p>
+    <div class="events-list" style="margin-top: 48px;">
+      <div class="event-item">
+        <div class="event-date-box"><span class="day">25</span><span class="month">Sep</span></div>
+        <div class="event-info">
+          <h4>Voices for Peace – Scottish Parliament, Edinburgh</h4>
+          <p>📍 Edinburgh, Scotland &nbsp;·&nbsp; Organised by Ahmadiyya Muslim Community UK</p>
+        </div>
+        <span class="event-tag">Completed</span>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box"><span class="day">18</span><span class="month">Dec</span></div>
+        <div class="event-info">
+          <h4>Voices for Peace – Capitol Hill, Washington D.C.</h4>
+          <p>📍 Washington D.C., USA &nbsp;·&nbsp; Ahmadiyya Muslim Community USA</p>
+        </div>
+        <span class="event-tag">Completed</span>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box" style="background: var(--gold)"><span class="day">TBC</span><span class="month">2025</span></div>
+        <div class="event-info">
+          <h4>Global Voices for Peace – Upcoming Forum</h4>
+          <p>📍 Location TBC &nbsp;·&nbsp; International Community Event</p>
+        </div>
+        <span class="event-tag" style="background: var(--blue)">Upcoming</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Contact Us</h2>
+      <div class="section-divider"></div>
+      <p class="section-text" style="margin-bottom: 40px;">
+        Whether you want to organise a local event, partner with us, or simply have a question — we'd love to hear from you.
+      </p>
+      <div class="contact-info-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <h4>Email</h4>
+          <p><a href="mailto:georgeterry.j@outlook.com">georgeterry.j@outlook.com</a></p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Address</h4>
+          <p>Aiwan-E-Mahmood, Unit 2 Bourne Mill Business Park<br>Centre Park, Farnham, Surrey, England GU9 9PS</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">🐦</div>
+        <div>
+          <h4>Twitter / X</h4>
+          <p>@Voices_4_Peace</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="How can we help?">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Your message..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="font-family:'Cinzel',serif; color:white; font-size:1.1rem;">Voices for Peace</div>
+      <p>A global campaign by the Ahmadiyya Muslim Community International, calling for peace, justice, and the protection of innocent lives worldwide.</p>
+      <div class="footer-social">
+        <a href="https://twitter.com/Voices_4_Peace" class="social-btn">𝕏</a>
+        <a href="https://voicesforpeace.org" class="social-btn">🌐</a>
+        <a href="mailto:georgeterry.j@outlook.com" class="social-btn">✉</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#latest">Latest Posts</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://voicesforpeace.org/pearl-of-wisdom/">Pearls of Wisdom</a></li>
+        <li><a href="https://voicesforpeace.org/speeches-and-addresses/">Speeches</a></li>
+        <li><a href="https://voicesforpeace.org/books/">Books</a></li>
+        <li><a href="https://voicesforpeace.org/wp-content/uploads/2025/05/CeasefireNow-Letter-May-2025.docx">Letter Template</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="https://www.justgiving.com/page/voicesforpeace">Donate</a></li>
+        <li><a href="https://voicesforpeace.org/events/">Events</a></li>
+        <li><a href="mailto:georgeterry.j@outlook.com">Get Involved</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Voices for Peace · Ahmadiyya Muslim Community International</span>
+    <span class="footer-logo-text">☮ Voices for Peace</span>
+  </div>
+</footer>
+
+<script>
+  // Smooth active nav on scroll
+  const sections = document.querySelectorAll('section[id], .hero');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  // Form submission
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Message Sent';
+    btn.style.background = '#2e7d32';
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Nav scroll highlight
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY + 100;
+    sections.forEach(sec => {
+      if (y >= sec.offsetTop && y < sec.offsetTop + sec.offsetHeight) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.nav-links a[href="#${sec.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  });
+
+  // Animate stats on scroll
+  const stats = document.querySelectorAll('.stat-num');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+     
